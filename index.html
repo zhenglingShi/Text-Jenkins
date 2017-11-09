@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/fileSave.js" ></script>
+		<script type="text/javascript" src="js/jquery_wrodexport.js" ></script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			#app{
+				max-width: 640px;
+				margin: 0 auto;
+			}
+			ul{
+				/*list-style: none;*/
+				list-style-type: cjk-heavenly-stem;
+			}
+			ul li{
+				width: 100%;
+				height: 40px;
+				background: #f2f2f2;
+				line-height: 40px;
+				margin-bottom: 5px;
+				padding: 0 10px;
+				cursor: pointer;
+			}
+			.select{
+				background-color: rgb(3,169,244);
+				color: white;
+			}
+			.btn{
+				width: 215px;
+				margin: 0 auto;
+				margin-top: 20px;
+				padding: .6em;
+				background-color: rgb(3,169,244);
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(item,index) in items" v-on:click="itemClick(item)" :class="{ select: item.isSelect }">{{item.name}}</li>
+			</ul>
+			<div class="btn" v-on:click="btnClick()">
+				点击 在console中查看选中
+			</div>
+			<pre style="tab-size: 2;"><code>
+				    public static void main(String [] args){  
+				        System.out.println("HelloWorld!");  
+				    } 
+			</code></pre>  
+			<input name='uploads[]' type="file" multiple @chagne="inputDataChange">
+		</div>
+		<textarea name="" rows="" cols="" placeholder=""></textarea>
+		<button id="btn">export</button>
+	</body>
+	<script>
+		new Vue({
+		  el: '#app',
+		  data: {
+		    message: 'Hello Vue.js!',
+		    items: [],
+		    selectId: [],
+		  },
+		  created() {
+		  	for (let i = 0; i < 4; i++) {
+		  	  	this.items.push({id: '1' + i,'name': 'text1' + i, isSelect: false })
+		  	}
+		  },
+		  methods: {
+		  	itemClick(item) {
+		  		item.isSelect = !item.isSelect;
+		  		let index = this.selectId.indexOf(item.id);
+		  		if (item.isSelect) {
+		  			if (index == -1) {
+		  				this.selectId.push(item.id);
+		  			}
+		  		} else {
+		  			if (index >= 0) {
+		  				this.selectId.splice(index, 1);
+		  			}
+		  		}
+		  	},
+		  	btnClick() {
+		  		console.log("选中的数据有：", this.selectId);
+		  	},
+		  	inputDataChange(e) {
+		  		console.log(e);
+		  	}
+		  }
+		});
+		$(document).ready(function($) {
+		    $("#btn").click(function(event) {
+		        $("#app").wordExport();
+		    });
+		});
+	</script>
+</html>
