@@ -33,7 +33,8 @@
 				cursor: pointer;
 			}
 			.select{
-				background-color: rgb(3,169,244);
+				/* background-color: rgb(3,169,244); */
+				background-color:#4CAF50;
 				color: white;
 			}
 			.btn{
@@ -41,7 +42,8 @@
 				margin: 0 auto;
 				margin-top: 20px;
 				padding: .6em;
-				background-color: rgb(3,169,244);
+				background-color:#4CAF50;
+				/* background-color: rgb(3,169,244); */
 				color: white;
 			}
 		</style>
@@ -51,14 +53,14 @@
 			<ul>
 				<li v-for="(item,index) in items" v-on:click="itemClick(item)" :class="{ select: item.isSelect }">{{item.name}}</li>
 			</ul>
-			<div class="btn" v-on:click="btnClick()">
+			<!-- <div class="btn" v-on:click="btnClick()">
 				点击123 在console中查看选中
-			</div>
-			<pre style="tab-size: 2;"><code>
+			</div> -->
+			<!-- <pre style="tab-size: 2;"><code>
 				    public static void main(String [] args){  
 				        System.out.println("HelloWorld!");  
 				    } 
-			</code></pre>  
+			</code></pre>   -->
 			<input name='uploads[]' type="file" multiple @chagne="inputDataChange">
 		</div>
 		<textarea name="" rows="" cols="" placeholder=""></textarea>
